@@ -1,0 +1,112 @@
+SuccessfulSale: Store.ECommerce
+  > SubmitOrder: Store.Sales
+    ~ OrderPlaced: Store.ECommerce
+    @ BuyersRemorseIsOver
+
+      ~ OrderAccepted: Store.ContentManagement
+        > ProvisionDownloadRequest: Store.Operations
+          < ProvisionDownloadResponse
+            ~ DownloadIsReady: Store.ECommerce
+
+      ~ OrderAccepted: Store.CustomerRelations 
+        ~ ClientBecamePreferred: Store.CustomerRelations
+
+
+LongNames: Originating.Endpoint.With.Long.Name.That.Will.Wrap
+  > Message: Another.Endpoint.With.Long.Name.That.Will.Wrap
+    ~ AnotherMessage: Endpoint.WithAReallyLongNameThatIsUnbrokenBy.Periods 
+    ~ AnotherMessage: aridiculouslylongendpointnamewithnopunctuationthatrealisticallynooneintheirrightmindwouldchoosetouseinarealproductionsystembutiwantedittobelongenoughtodemonstratethewaythatwrappingofendpointnameshappenswhenitissolongthatitnolongerfitstheboundingboxyouaretryingtoputitin  
+
+
+MultipleTimeouts: Web
+  > Start: Timeouty
+    @ OneTimeout
+      @ CascadingTimeout
+      @ SecondCascadingTimeout
+        @ SoManyTimeouts
+    @ TwoTimeouts
+    @ ThreeTimeouts
+    @ FourTimeouts
+
+
+MultiReply: Sender
+  > Message: Receiver
+    < Reply
+    < Reply
+    < Reply
+      > GotThreeReplies: SomeOtherEndpoint
+
+
+StopTalkingToYourself: Yourself
+  > Talking: Yourself
+    > Talking: Yourself
+      > Talking: Yourself
+        > Talking: Yourself
+          > Talking: Yourself
+            > Talking: Yourself
+              > Talking: Yourself
+                > Talking: Yourself
+                  > Talking: Yourself
+                    > Talking: Yourself
+                      > Talking: Yourself
+
+ReallyLongConversation: Start
+  > Initiate: A
+    > Msg: B1
+    > Msg: B2
+    > Msg: B3
+    > Msg: B4
+    > Msg: B5
+    > Msg: B6
+    > Msg: B7
+    > Msg: B8
+    > Msg: B9
+    > Msg: B10
+    > Msg: B11
+    > Msg: B12
+    > Msg: B13
+    > Msg: B14
+    > Msg: B15
+    > Msg: B16
+    > Msg: B17
+    > Msg: B18
+    > Msg: B19
+    > Msg: B21
+    > Msg: B22
+    > Msg: B23
+    > Msg: B24
+    > Msg: B25
+    > Msg: B26
+    > Msg: B27
+    > Msg: B28
+    > Msg: B29
+    > Msg: B30
+    > Msg: B31
+    > Msg: B32
+    > Msg: B33
+    > Msg: B34
+    > Msg: B35
+    > Msg: B36
+    > Msg: B37
+    > Msg: B38
+    > Msg: B39
+    > Msg: B40
+    > Msg: B41
+    > Msg: B42
+    > Msg: B43
+    > Msg: B44
+    > Msg: B45
+    > Msg: B46
+    > Msg: B47
+    > Msg: B48
+    > Msg: B49
+    > Msg: B50
+    > Msg: B51
+    > Msg: B52
+    > Msg: B53
+    > Msg: B54
+    > Msg: B55
+    > Msg: B56
+    > Msg: B57
+    > Msg: B58
+    > Msg: B59
