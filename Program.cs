@@ -60,8 +60,18 @@ namespace ConsoleApplication1
                             tm.Headers[Headers.IsSagaTimeoutMessage] = "true";
                         }
 
+                        var outQueue = "audit";
+                        if (m.Intent == "Error")
+                        {
+                            outQueue = "error";
+                            tm.Headers["NServiceBus.ExceptionInfo.ExceptionType"] = typeof(Exception).FullName;
+                            tm.Headers["NServiceBus.ExceptionInfo.Message"] = "There was an error.";
+                            tm.Headers["NServiceBus.FailedQ"] = $"{m.Sender}@MACHINE";
+                            tm.Headers["NServiceBus.TimeOfFailure"] = ToWireFormattedString(DateTime.Now);
+                        }
+
                         Console.WriteLine($"\t {m.Intent} {m.MessageType} from {m.Sender} to {m.Receiver}");
-                        messageSender.Send(tm, new SendOptions(Address.Parse("audit")));
+                        messageSender.Send(tm, new SendOptions(Address.Parse(outQueue)));
                     }
                 }
             }

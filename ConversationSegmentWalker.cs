@@ -15,13 +15,6 @@
             _startingEndpoint = startingEndpoint;
         }
 
-        [Parse("> (.*): (.*)")]
-        public ConversationSegmentWalker Send(string messageType, string destinationEndpoint)
-        {
-            var message = AddMessageToConversation("Send", messageType, destinationEndpoint);
-            return new ConversationSegmentWalker(_conversation, message);
-        }
-
         private SentMessage AddMessageToConversation(string intent, string messageType, string destinationEndpoint)
         {
             var message = new SentMessage
@@ -35,6 +28,13 @@
 
             _conversation.Messages.Add(message);
             return message;
+        }
+
+        [Parse("> (.*): (.*)")]
+        public ConversationSegmentWalker Send(string messageType, string destinationEndpoint)
+        {
+            var message = AddMessageToConversation("Send", messageType, destinationEndpoint);
+            return new ConversationSegmentWalker(_conversation, message);
         }
 
         [Parse("~ (.*): (.*)")]
@@ -56,6 +56,14 @@
         public ConversationSegmentWalker Reply(string messageType)
         {
             var message = AddMessageToConversation("Reply", messageType, _previousMessage?.Sender);
+
+            return new ConversationSegmentWalker(_conversation, message);
+        }
+
+        [Parse("\\* (.*): (.*)")]
+        public ConversationSegmentWalker Error(string messageType, string subscriberEndpoint)
+        {
+            var message = AddMessageToConversation("Error", messageType, subscriberEndpoint);
 
             return new ConversationSegmentWalker(_conversation, message);
         }
